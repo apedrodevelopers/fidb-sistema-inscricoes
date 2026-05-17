@@ -4,13 +4,13 @@
 --  banco.sql — Estrutura completa da base de dados
 -- ============================================================
 
-DROP DATABASE IF EXISTS bd_inscricoes;
+DROP DATABASE IF EXISTS inscricoes;
 
-CREATE DATABASE bd_inscricoes
+CREATE DATABASE inscricoes
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
-USE bd_inscricoes;
+USE inscricoes;
 
 -- ============================================================
 --  TABELA: utilizadores
@@ -36,7 +36,7 @@ CREATE TABLE utilizadores (
 );
 
 INSERT INTO utilizadores (nome, email, nome_utilizador, senha_hash, cargo, perfil, estado)
-VALUES ('Administrador', 'admin@capacitacfti.ao', 'admin', '1234567890',
+VALUES ('Administrador', 'admin@capacita.ao', 'admin', '1234567890',
         'Gestor do sistema', 'administrador', 'activo');
 
 
