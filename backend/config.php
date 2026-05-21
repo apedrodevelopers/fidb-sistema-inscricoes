@@ -7,3 +7,12 @@ function estabelecerConexaoComBanco(): PDO
 
     return new PDO($dsn, $user, $pass);
 }
+
+const EMOJIS = [
+    "computador" => "🖥️",
+    "configuracoes" => "⚙️",
+    "gabinete" => "🗄️",
+    "paleta" => "🎨",
+    "rede" => "🌐",
+    "seguranca" => "🔐"
+];

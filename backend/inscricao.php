@@ -1,5 +1,4 @@
 <?php
-require "config.php";
 
 if (isset($_GET["action"])) {
     if ($_GET["action"] === "INSERT") {
@@ -94,4 +93,28 @@ function cadastrarFormando(array $dados): int
     $stmt->execute();
 
     return $conexao->lastInsertId();
+}
+
+function buscarInscricoes(): array
+{
+
+    $conexao = estabelecerConexaoComBanco();
+
+    $stmt = $conexao->query("
+        SELECT
+            f.nome AS formando,
+            f.email,
+            c.nome AS curso,
+            i.estado,
+            i.criado_em,
+            i.numero_inscricao,
+            i.id AS id_inscricao
+        FROM 
+            inscricoes i
+            INNER JOIN formandos f ON i.formando_id = f.id
+            INNER JOIN cursos c ON i.curso_id = c.id
+        ORDER BY i.id DESC
+    ");
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

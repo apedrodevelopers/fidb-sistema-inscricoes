@@ -137,7 +137,7 @@ try {
 
   <nav class="navbar">
     <div class="navbar-interior">
-      <a href="../inicio.html" class="navbar-marca">
+      <a href="../inicio.php" class="navbar-marca">
         <div class="navbar-marca-icone">🎓</div>
         <div>
           <div class="navbar-marca-nome">Capacita CFTI</div>
@@ -145,12 +145,12 @@ try {
         </div>
       </a>
       <div class="navbar-links">
-        <a href="../inicio.html" class="navbar-link">Início</a>
-        <a href="cursos.html" class="navbar-link">Cursos</a>
-        <a href="inscricao.html" class="navbar-link activo">Inscrição</a>
+        <a href="../inicio.php" class="navbar-link">Início</a>
+        <a href="cursos.php" class="navbar-link">Cursos</a>
+        <a href="inscricao.php" class="navbar-link activo">Inscrição</a>
         <a href="contacto.html" class="navbar-link">Contacto</a>
       </div>
-      <div class="navbar-cta"><a href="inscricao.html" class="btn-nav">Inscrever-me</a></div>
+      <div class="navbar-cta"><a href="inscricao.php" class="btn-nav">Inscrever-me</a></div>
     </div>
   </nav>
 
@@ -250,7 +250,7 @@ try {
 
                 <label class="opcao-curso">
                   <input type="radio" name="curso" value="<?= $curso["id"] ?>" required>
-                  <span class="opcao-curso-emoji">🖥️</span>
+                  <span class="opcao-curso-emoji"> <?= EMOJIS[$curso["emoji"]] ?>  </span>
                   <div class="opcao-curso-nome"> <?= $curso["nome"] ?> </div>
                   <div class="opcao-curso-meta">
                     <span class="etiqueta etiqueta-azul"> <?= $curso["duracao"] ?> </span>
@@ -270,7 +270,7 @@ try {
 
 
         <div style="display:flex; gap:10px; justify-content:flex-end;">
-          <a href="cursos.html" class="btn btn-secundario">Ver cursos</a>
+          <a href="cursos.php" class="btn btn-secundario">Ver cursos</a>
           <button type="submit" class="btn btn-primario">Confirmar inscrição →</button>
         </div>
 
@@ -364,9 +364,9 @@ try {
         <div class="rodape-sub">Centro de Formação em Tecnologias de Informação</div>
       </div>
       <div class="rodape-links">
-        <a href="../inicio.html">Início</a>
-        <a href="cursos.html">Cursos</a>
-        <a href="inscricao.html">Inscrição</a>
+        <a href="../inicio.php">Início</a>
+        <a href="cursos.php">Cursos</a>
+        <a href="inscricao.php">Inscrição</a>
         <a href="contacto.html">Contacto</a>
       </div>
     </div>
