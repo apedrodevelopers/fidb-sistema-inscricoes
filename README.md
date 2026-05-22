@@ -2,7 +2,7 @@
 
 ## 📖 Sobre o projeto
 
-Este repositório contém o **Sistema de Inscrições da FIDB**, desenvolvido como parte da **Formação Inicial de Desenvolvimento Backend**.
+Este repositório contém o **Sistema de Inscrições**, desenvolvido como parte da **Formação Inicial de Desenvolvimento Backend**.
 
 O sistema permite gerir inscrições em cursos de formação, com uma **área pública** para formandos e uma **área administrativa protegida por sessão** para administradores.
 
@@ -15,7 +15,7 @@ A aplicação suporta dois tipos de utilizadores:
 
 ## 🎯 Objetivo do projeto
 
-Implementar um **sistema completo de inscrições em cursos**, utilizando **PHP, MySQL e sessões**.
+Implementar o **backend do sistema de inscrições para centros de formações profissionais**, utilizando **PHP e MySQL**.
 
 Este projeto tem como objetivo praticar:
 
