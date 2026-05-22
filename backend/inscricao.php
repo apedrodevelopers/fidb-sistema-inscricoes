@@ -126,9 +126,13 @@ function cadastrarFormando(array $dados): int
 function buscarInscricoes(string $filtroDeEstado = ""): array
 {
 
+    if ($filtroDeEstado != "pendente" && $filtroDeEstado != "aprovado" && $filtroDeEstado != "rejeitado") {
+        $filtroDeEstado = "%";
+    }
+
     $conexao = estabelecerConexaoComBanco();
 
-    $sqlSemFiltro = "
+    $sql = "
         SELECT
             f.nome AS formando,
             f.email,
@@ -141,10 +145,24 @@ function buscarInscricoes(string $filtroDeEstado = ""): array
             inscricoes i
             INNER JOIN formandos f ON i.formando_id = f.id
             INNER JOIN cursos c ON i.curso_id = c.id
+        WHERE i.estado LIKE :estado
         ORDER BY i.id DESC
     ";
 
-    $sqlComFiltro = "
+    $stmt = $conexao->prepare($sql);
+    $stmt->bindParam(":estado", $filtroDeEstado);
+
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function buscarInscricoesPorCurso(int $idCurso): array
+{
+
+    $conexao = estabelecerConexaoComBanco();
+
+    $sql = "
         SELECT
             f.nome AS formando,
             f.email,
@@ -157,11 +175,14 @@ function buscarInscricoes(string $filtroDeEstado = ""): array
             inscricoes i
             INNER JOIN formandos f ON i.formando_id = f.id
             INNER JOIN cursos c ON i.curso_id = c.id
-        WHERE i.estado = '$filtroDeEstado'
+        WHERE c.id = :id_curso
         ORDER BY i.id DESC
     ";
 
-    $stmt = $conexao->query($filtroDeEstado === "" ? $sqlSemFiltro : $sqlComFiltro);
+    $stmt = $conexao->prepare($sql);
+    $stmt->bindParam(":id_curso", $idCurso);
+
+    $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

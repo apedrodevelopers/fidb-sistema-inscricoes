@@ -17,11 +17,26 @@ require "../../backend/inscricao.php";
 
 $resumo = exibirResumoInscricoes();
 
+$inscricoes = [];
 
 $filtroDoEstado = $_GET["estado"] ?? "";
 
-$inscricoes = buscarInscricoes($filtroDoEstado);
+if (isset($_GET["estado"])) {
 
+  $inscricoes = buscarInscricoes($filtroDoEstado);
+}
+
+if (isset($_GET["curso"])) {
+  $idCurso = $_GET["curso"] ?? "";
+
+  if ($idCurso === "") {
+    $inscricoes = buscarInscricoes($filtroDoEstado);
+  } else {
+    $inscricoes = buscarInscricoesPorCurso($idCurso);
+  }
+}
+
+$cursos = buscarCursos();
 
 ?>
 
@@ -61,6 +76,7 @@ $inscricoes = buscarInscricoes($filtroDoEstado);
         <div class="nav-grupo-titulo">Gestão</div>
         <a href="../cursos/listar.php" class="nav-item"><span class="nav-item-icone">🎓</span> Cursos</a>
         <a href="listar.php" class="nav-item activo"><span class="nav-item-icone">👥</span> Formandos</a>
+        <a href="../usuarios/listar.php" class="nav-item"><span class="nav-item-icone">🔑</span> Utilizadores</a>
       </div>
       <div class="nav-grupo">
         <div class="nav-grupo-titulo">Sistema</div>
@@ -114,15 +130,17 @@ $inscricoes = buscarInscricoes($filtroDoEstado);
         <a href="listar.php?estado=pendente" class="btn-filtro">⏳ Pendentes</a>
         <a href="listar.php?estado=rejeitado" class="btn-filtro">❌ Rejeitados</a>
         <!-- Filtro por curso via form GET — a integrar com PHP -->
-        <form method="GET" action="listar.html" style="margin-left:auto; display:flex; gap:6px;">
+        <form method="GET" action="listar.php" style="margin-left:auto; display:flex; gap:6px;">
           <select name="curso" style="font-size:12px; padding:6px 10px; max-width:200px;">
             <option value="">Todos os cursos</option>
-            <option value="1">Web Frontend</option>
-            <option value="2">Backend</option>
-            <option value="3">Base de Dados</option>
-            <option value="4">UI/UX Design</option>
-            <option value="5">Redes</option>
-            <option value="6">Cibersegurança</option>
+            <?php
+            foreach ($cursos as $curso) {
+            ?>
+              <option value="<?= $curso["id"] ?>"><?= $curso["nome"] ?></option>
+            <?php
+            }
+            ?>
+
           </select>
           <button type="submit" class="btn btn-secundario btn-sm">Filtrar</button>
         </form>

@@ -18,6 +18,11 @@ if (!defined("EMOJIS")) {
         "gabinete" => "🗄️",
         "paleta" => "🎨",
         "rede" => "🌐",
-        "seguranca" => "🔐"
+        "seguranca" => "🔐",
+        "mobile" => "📱",
+        "nuvem" => "☁️",
+        "grafico" => "📊",
+        "ia" => "🤖",
+        "outro" => "📘"
     ]);
 }
