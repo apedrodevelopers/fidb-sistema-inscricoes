@@ -1,12 +1,37 @@
 <?php
-
+require "config.php";
 if (isset($_GET["action"])) {
+
     if ($_GET["action"] === "INSERT") {
         $idFormando = cadastrarFormando($_POST);
         $idInscricao = inscrever($_POST["curso"], $idFormando);
 
         header("Location: ../paginas/comprovativo.php?id=$idInscricao");
+        exit;
     }
+
+    if ($_GET["action"] === "ATUALIZAR_ESTADO") {
+        $idInscricao = $_GET["id"];
+        $novoEstado = $_GET["estado"];
+
+        atualizarEstado($idInscricao, $novoEstado);
+
+        header("Location: ../admin/formandos/listar.php");
+        exit;
+    }
+}
+
+function atualizarEstado(int $id, string $estado): void
+{
+
+    $conexao = estabelecerConexaoComBanco();
+
+    $stmt =   $conexao->prepare("UPDATE inscricoes SET estado=:estado WHERE id = :id");
+
+    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":estado", $estado);
+
+    $stmt->execute();
 }
 
 function recuperarInscricaoPorId(int $id): array
@@ -25,8 +50,11 @@ function recuperarInscricaoPorId(int $id): array
                 f.email,
                 f.telefone,
                 f.documento,
+                f.escolaridade,
+                f.morada,
                 c.nome AS curso,
-                c.duracao
+                c.duracao,
+                c.emoji
             FROM inscricoes i
             INNER JOIN formandos f ON f.id = i.formando_id
             INNER JOIN cursos c ON c.id = i.curso_id
@@ -95,12 +123,12 @@ function cadastrarFormando(array $dados): int
     return $conexao->lastInsertId();
 }
 
-function buscarInscricoes(): array
+function buscarInscricoes(string $filtroDeEstado = ""): array
 {
 
     $conexao = estabelecerConexaoComBanco();
 
-    $stmt = $conexao->query("
+    $sqlSemFiltro = "
         SELECT
             f.nome AS formando,
             f.email,
@@ -114,7 +142,26 @@ function buscarInscricoes(): array
             INNER JOIN formandos f ON i.formando_id = f.id
             INNER JOIN cursos c ON i.curso_id = c.id
         ORDER BY i.id DESC
-    ");
+    ";
+
+    $sqlComFiltro = "
+        SELECT
+            f.nome AS formando,
+            f.email,
+            c.nome AS curso,
+            i.estado,
+            i.criado_em,
+            i.numero_inscricao,
+            i.id AS id_inscricao
+        FROM 
+            inscricoes i
+            INNER JOIN formandos f ON i.formando_id = f.id
+            INNER JOIN cursos c ON i.curso_id = c.id
+        WHERE i.estado = '$filtroDeEstado'
+        ORDER BY i.id DESC
+    ";
+
+    $stmt = $conexao->query($filtroDeEstado === "" ? $sqlSemFiltro : $sqlComFiltro);
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

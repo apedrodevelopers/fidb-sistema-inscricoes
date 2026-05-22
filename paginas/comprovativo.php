@@ -285,7 +285,7 @@ try {
 
   <nav class="navbar">
     <div class="navbar-interior">
-      <a href="../inicio.html" class="navbar-marca">
+      <a href="../inicio.php" class="navbar-marca">
         <div class="navbar-marca-icone">🎓</div>
         <div>
           <div class="navbar-marca-nome">Capacita CFTI</div>
@@ -293,9 +293,9 @@ try {
         </div>
       </a>
       <div class="navbar-links">
-        <a href="../inicio.html" class="navbar-link">Início</a>
-        <a href="cursos.html" class="navbar-link">Cursos</a>
-        <a href="inscricao.html" class="navbar-link">Inscrição</a>
+        <a href="../inicio.php" class="navbar-link">Início</a>
+        <a href="cursos.php" class="navbar-link">Cursos</a>
+        <a href="inscricao.php" class="navbar-link">Inscrição</a>
         <a href="contacto.html" class="navbar-link">Contacto</a>
       </div>
       <div class="navbar-cta"><a href="inscricao.html" class="btn-nav">Nova inscrição</a></div>
@@ -372,8 +372,8 @@ try {
     <!-- Acções -->
     <div class="accoes animar" style="animation-delay:.28s">
       <button class="btn btn-secundario" onclick="window.print()" style="flex:1;justify-content:center;">🖨 Imprimir comprovativo</button>
-      <a href="inscricao.html" class="btn btn-primario" style="flex:1;justify-content:center;">+ Nova inscrição</a>
-      <a href="../inicio.html" class="btn btn-dourado" style="flex:1;justify-content:center;">Voltar ao início</a>
+      <a href="inscricao.php" class="btn btn-primario" style="flex:1;justify-content:center;">+ Nova inscrição</a>
+      <a href="../inicio.php" class="btn btn-dourado" style="flex:1;justify-content:center;">Voltar ao início</a>
     </div>
 
   </div>
@@ -385,9 +385,9 @@ try {
         <div class="rodape-sub">Centro de Formação em Tecnologias de Informação</div>
       </div>
       <div class="rodape-links">
-        <a href="../inicio.html">Início</a>
-        <a href="cursos.html">Cursos</a>
-        <a href="inscricao.html">Inscrição</a>
+        <a href="../inicio.php">Início</a>
+        <a href="cursos.php">Cursos</a>
+        <a href="inscricao.php">Inscrição</a>
         <a href="contacto.html">Contacto</a>
       </div>
     </div>

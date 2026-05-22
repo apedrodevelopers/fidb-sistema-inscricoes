@@ -5,7 +5,7 @@ session_start();
 if (
   !isset($_SESSION["usuario-logado"])
 ) {
-  header("Location: ../admin/entrar.php");
+  header("Location: ../entrar.php");
 }
 
 $usuario = $_SESSION["usuario-logado"]["nome"];
@@ -17,9 +17,12 @@ require "../../backend/inscricao.php";
 
 $resumo = exibirResumoInscricoes();
 
-$inscricoes = buscarInscricoes();
 
-// $cursos = buscarCursosComDetalhesDeVagas();
+$filtroDoEstado = $_GET["estado"] ?? "";
+
+$inscricoes = buscarInscricoes($filtroDoEstado);
+
+
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +64,7 @@ $inscricoes = buscarInscricoes();
       </div>
       <div class="nav-grupo">
         <div class="nav-grupo-titulo">Sistema</div>
-        <a href="../inicio.php" class="nav-item"><span class="nav-item-icone">🌐</span> Site público</a>
+        <a href="../../inicio.php" class="nav-item"><span class="nav-item-icone">🌐</span> Site público</a>
       </div>
     </div>
     <div class="nav-rodape">
@@ -106,10 +109,10 @@ $inscricoes = buscarInscricoes();
 
       <!-- FILTROS — links simples prontos para integrar com ?estado= no PHP -->
       <div class="barra-filtros">
-        <a href="listar.html" class="btn-filtro activo">Todos (10)</a>
-        <a href="listar.html?estado=aprovado" class="btn-filtro">✅ Aprovados</a>
-        <a href="listar.html?estado=pendente" class="btn-filtro">⏳ Pendentes</a>
-        <a href="listar.html?estado=rejeitado" class="btn-filtro">❌ Rejeitados</a>
+        <a href="listar.php" class="btn-filtro activo">Todos (10)</a>
+        <a href="listar.php?estado=aprovado" class="btn-filtro">✅ Aprovados</a>
+        <a href="listar.php?estado=pendente" class="btn-filtro">⏳ Pendentes</a>
+        <a href="listar.php?estado=rejeitado" class="btn-filtro">❌ Rejeitados</a>
         <!-- Filtro por curso via form GET — a integrar com PHP -->
         <form method="GET" action="listar.html" style="margin-left:auto; display:flex; gap:6px;">
           <select name="curso" style="font-size:12px; padding:6px 10px; max-width:200px;">
@@ -170,9 +173,9 @@ $inscricoes = buscarInscricoes();
                       <!-- Ver — navega para página de detalhes -->
                       <a href="ver.php?id=<?= $inscricao['id_inscricao'] ?>" class="btn btn-secundario btn-sm">👁 Ver</a>
                       <!-- Aprovar — link directo para acção PHP: href="actualizar_estado.php?id=1&estado=aprovado" -->
-                      <a href="actualizar_estado.php?id=<?= $inscricao['id_inscricao'] ?>&estado=aprovado" class="btn btn-sucesso btn-sm">✅ Aprovar</a>
+                      <a href="../../backend/inscricao.php?action=ATUALIZAR_ESTADO&id=<?= $inscricao['id_inscricao'] ?>&estado=aprovado" class="btn btn-sucesso btn-sm">✅ Aprovar</a>
                       <!-- Rejeitar — link directo para acção PHP: href="actualizar_estado.php?id=1&estado=rejeitado" -->
-                      <a href="actualizar_estado.php?id=<?= $inscricao['id_inscricao'] ?>&estado=rejeitado" class="btn btn-perigo btn-sm">❌ Rejeitar</a>
+                      <a href="../../backend/inscricao.php?action=ATUALIZAR_ESTADO&id=<?= $inscricao['id_inscricao'] ?>&estado=rejeitado" class="btn btn-perigo btn-sm">❌ Rejeitar</a>
                     </div>
                   </td>
                 </tr>

@@ -1,6 +1,5 @@
 <?php
 require "config.php";
-
 function buscarCursos(): array
 {
     $conexao = estabelecerConexaoComBanco();
