@@ -1,8 +1,8 @@
-# 📋 Sistema de Inscrições — FIDB (PHP + MySQL)
+# 📋 Sistema de Inscrições — FIDB
 
 ## 📖 Sobre o projeto
 
-Este repositório contém o **Sistema de Inscrições da FIDB**, desenvolvido como parte da formação prática em **Backend com PHP**.
+Este repositório contém o **Sistema de Inscrições da FIDB**, desenvolvido como parte da **Formação Inicial de Desenvolvimento Backend**.
 
 O sistema permite gerir inscrições em cursos de formação, com uma **área pública** para formandos e uma **área administrativa protegida por sessão** para administradores.
 
